@@ -1,0 +1,181 @@
+{
+  "sqlite_path": "data/raw/raw.db",
+  "mongo_database": "processed_data",
+  "matching": {
+    "min_table_similarity": 0.7
+  },
+  "cleaning": {
+    "drop_duplicates": true,
+    "strip_strings": true,
+    "empty_strings_to_null": true,
+    "string_fill": "Unknown"
+  },
+  "validation": {
+    "required_columns": {
+      "customers_a": [
+        "identifier",
+        "name",
+        "email"
+      ],
+      "customers": [
+        "identifier",
+        "name",
+        "email",
+        "status"
+      ],
+      "orders": [
+        "order_id",
+        "identifier",
+        "amount",
+        "status",
+        "date"
+      ],
+      "students": [
+        "student_id",
+        "name"
+      ],
+      "products": [
+        "product_id",
+        "product_name",
+        "amount",
+        "stock"
+      ],
+      "netflix_shows": [
+        "show_id",
+        "type",
+        "title"
+      ],
+      "books": [
+        "name",
+        "availability"
+      ],
+      "sample_api": [
+        "identifier",
+        "name",
+        "email",
+        "username"
+      ]
+    },
+    "allowed_values": {
+      "customers_a.country": [
+        "Yemen"
+      ],
+      "customers.status": [
+        "active",
+        "inactive"
+      ],
+      "orders.status": [
+        "paid",
+        "pending",
+        "cancelled"
+      ],
+      "students.city": [
+        "Sanaa",
+        "Ibb",
+        "Taiz",
+        "Dhamar",
+        "Aden",
+        "Unknown"
+      ],
+      "netflix_shows.type": [
+        "Movie",
+        "TV Show"
+      ],
+      "books.availability": [
+        "In stock",
+        "Out of stock"
+      ]
+    },
+    "ranges": {
+      "customers_a.identifier": {
+        "min": 1
+      },
+      "customers_a.age": {
+        "min": 18,
+        "max": 100
+      },
+      "customers.identifier": {
+        "min": 1
+      },
+      "customers.age": {
+        "min": 18,
+        "max": 100
+      },
+      "orders.order_id": {
+        "min": 1
+      },
+      "orders.amount": {
+        "min": 0.0
+      },
+      "students.age": {
+        "min": 17,
+        "max": 60
+      },
+      "students.attendance": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "students.gpa": {
+        "min": 0.0,
+        "max": 4.0
+      },
+      "students.academic_gpa": {
+        "min": 0.0,
+        "max": 4.0
+      },
+      "students.academic_attendance": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "products.amount": {
+        "min": 0.0
+      },
+      "products.stock": {
+        "min": 0
+      },
+      "netflix_shows.release_year": {
+        "min": 1900,
+        "max": 2030
+      },
+      "sample_api.identifier": {
+        "min": 1
+      }
+    },
+    "regex": {
+      "customers_a.email": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+      "customers.email": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+      "orders.date": "^\\d{4}-\\d{2}-\\d{2}",
+      "sample_api.email": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+    }
+  },
+  "sources": {
+    "csv": [
+      "data/sample/customers_a.csv",
+      "data/sample/customers_b.csv",
+      "data/sample/orders.csv"
+    ],
+    "api": [
+      {
+        "name": "sample_api",
+        "url": "https://jsonplaceholder.typicode.com/users"
+      }
+    ],
+    "web": [
+      {
+        "name": "books",
+        "url": "https://books.toscrape.com/"
+      }
+    ],
+    "postgresql": {
+      "enabled": true,
+      "schemas": [
+        "public"
+      ]
+    },
+    "mongodb": {
+      "enabled": true,
+      "database": "university_ai",
+      "collections": []
+    }
+  }
+}
